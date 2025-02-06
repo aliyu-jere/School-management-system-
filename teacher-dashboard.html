@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Teacher Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f5f6f7;
+        }
+        .sidebar {
+            width: 200px;
+            background: #2c3e50;
+            color: white;
+            height: 100vh;
+            padding: 20px;
+            position: fixed;
+        }
+        .content {
+            margin-left: 240px;
+            padding: 20px;
+        }
+        .menu-item {
+            padding: 10px;
+            cursor: pointer;
+        }
+        .menu-item:hover {
+            background: #34495e;
+        }
+        .attendance-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+        }
+        .day-box {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h3>Menu</h3>
+        <div class="menu-item" onclick="showTab('attendance')">Attendance</div>
+        <div class="menu-item" onclick="showTab('timetable')">Timetable</div>
+        <div class="menu-item" onclick="showTab('assignments')">Assignments</div>
+    </div>
+
+    <div class="content">
+        <div id="attendance" class="tab">
+            <h2>Attendance (JAN 2025)</h2>
+            <div class="attendance-grid" id="calendar"></div>
+        </div>
+
+        <div id="timetable" class="tab" style="display: none;">
+            <h2>Timetable (Class 9-A)</h2>
+            <div id="timetableEntries">
+                <!-- Timetable entries added via JS -->
+            </div>
+        </div>
+
+        <div id="assignments" class="tab" style="display: none;">
+            <h2>Assignments</h2>
+            <form id="addAssignment">
+                <input type="text" placeholder="Assignment Title" required>
+                <input type="date" required>
+                <button type="submit">Add Assignment</button>
+            </form>
+            <div id="assignmentList"></div>
+        </div>
+    </div>
+
+    <script>
+        // Show selected tab
+        function showTab(tabName) {
+            document.querySelectorAll('.tab').forEach(tab => tab.style.display = 'none');
+            document.getElementById(tabName).style.display = 'block';
+        }
+
+        // Generate attendance calendar
+        const calendar = document.getElementById('calendar');
+        for (let i = 1; i <= 30; i++) {
+            const day = document.createElement('div');
+            day.className = 'day-box';
+            day.textContent = i;
+            calendar.appendChild(day);
+        }
+
+        // Add assignment
+        document.getElementById('addAssignment').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const title = e.target.elements[0].value;
+            const date = e.target.elements[1].value;
+            const assignment = document.createElement('div');
+            assignment.textContent = `${title} - Due: ${date}`;
+            document.getElementById('assignmentList').appendChild(assignment);
+        });
+    </script>
+</body>
+</html>

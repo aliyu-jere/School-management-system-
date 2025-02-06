@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Dashboard</title>
+    <style>
+        /* Reuse styles from teacher dashboard */
+        body { font-family: Arial, sans-serif; margin: 0; }
+        .sidebar { width: 200px; background: #2c3e50; color: white; height: 100vh; padding: 20px; position: fixed; }
+        .content { margin-left: 240px; padding: 20px; }
+        .menu-item { padding: 10px; cursor: pointer; }
+        .assignment { padding: 10px; border: 1px solid #ddd; margin: 5px; }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h3>Menu</h3>
+        <div class="menu-item" onclick="showTab('attendance')">Attendance</div>
+        <div class="menu-item" onclick="showTab('timetable')">Timetable</div>
+        <div class="menu-item" onclick="showTab('assignments')">Assignments</div>
+    </div>
+
+    <div class="content">
+        <div id="attendance" class="tab">
+            <h2>Your Attendance: 95%</h2>
+        </div>
+
+        <div id="timetable" class="tab" style="display: none;">
+            <h2>Your Timetable</h2>
+            <div>Mon: Math (9:00 AM)</div>
+            <div>Tue: Science (10:00 AM)</div>
+        </div>
+
+        <div id="assignments" class="tab" style="display: none;">
+            <h2>Pending Assignments</h2>
+            <div class="assignment">Math Homework - Due: 2023-06-20</div>
+            <div class="assignment">Science Project - Due: 2023-06-25</div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            document.querySelectorAll('.tab').forEach(tab => tab.style.display = 'none');
+            document.getElementById(tabName).style.display = 'block';
+        }
+    </script>
+</body>
+</html>
